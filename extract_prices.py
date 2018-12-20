@@ -5,7 +5,7 @@ from iexfinance.stocks import get_historical_data
 import requests_cache
 
 
-def extract_first_close(data=dict) -> list:
+def extract_first_close(data=dict):
     """
     Extract the closing price of the first trading day of each month
     Input is ordered dict
