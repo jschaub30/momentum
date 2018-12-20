@@ -1,0 +1,5 @@
+dependencies:
+  - python=3.6.6
+  - pip:
+    - iexfinance
+    - requests-cache
