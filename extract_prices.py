@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 from datetime import datetime, timedelta
 from iexfinance.stocks import get_historical_data
@@ -13,7 +13,8 @@ def extract_first_close(data=dict):
     dates = []
     prices = []
     prev_month = ""
-    for key in data.keys():
+    all_dates = list(data.keys())
+    for key in all_dates:
         year, month, day = key.split("-")
         if month != prev_month:
             price = data[key]["close"]
@@ -21,10 +22,17 @@ def extract_first_close(data=dict):
             dates.append(key)
             #print("{}\t{}".format(key, price))
         prev_month = month
+    # Now append last trading day
+    if key != dates[-1]:
+        year, month, day = key.split("-")
+        price = data[key]["close"]
+        prices.append(price)
+        dates.append(key)
+
     return dates, prices
 
 
-start = datetime(2013, 12, 1)
+start = datetime(2014, 12, 1)
 today = datetime.today()
 
 expiry = timedelta(days=3)
